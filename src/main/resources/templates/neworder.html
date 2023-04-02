@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      tr,
+      td,
+      th {
+        border: 1px black solid;
+        border-collapse: collapse;
+        padding: 2px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/">New Order</a>
+
+    <form action="/neworder" method="post" data-th-object="${neworder}">
+      <hr />
+
+      <h3>Customer Details</h3>
+      <label for="orderDate">Order Date: </label>
+      <input type="date" name="orderDate" data-th-field="*{orderDate}" />
+      <br />
+      <label for="customerName">Customer Name:</label>
+      <input type="text" name="customerName" data-th-field="*{customerName}" />
+      <br />
+      <label for="shipAddress">Ship Address:</label>
+      <input type="text" name="shipAddress" data-th-field="*{shipAddress}" />
+      <br />
+      <label for="notes">Notes:</label>
+      <input type="text" name="notes" data-th-field="*{notes}" />
+
+      <hr />
+      <h3>Order Details</h3>
+      <label for="product">Product: </label>
+      <input type="text" name="product" />
+      <br />
+      <label for="unitPrice">Unit Price: </label>
+      <input type="number" name="unitPrice" />
+      <br />
+      <label for="quantity">Quantity: </label>
+      <input type="number" name="quantity" />
+
+      <br />
+
+      <button type="submit">Add</button>
+      <br />
+      <br />
+
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr data-th-each="order:${orderlist}">
+              <td data-th-text="${order.product}"></td>
+              <td data-th-text="${order.unitPrice}"></td>
+              <td data-th-text="${order.quantity}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <br />
+      <br />
+      <hr />
+      <button
+        type="submit"
+        formmethod="post"
+        formaction="/order"
+      >Submit Order</button>
+    </form>
+  </body>
+</html>
